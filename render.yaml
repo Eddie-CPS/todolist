@@ -2,12 +2,11 @@ services:
   - type: web
     name: todolist-app
     env: docker
-    dockerfilePath: ./Dockerfile
-    dockerContext: ./
+    region: oregon
     plan: free
-    port: 8080
+    branch: master
+    dockerfilePath: Dockerfile
+    dockerContext: .
     envVars:
       - key: PORT
         value: 8080
-      - key: JAVA_OPTS
-        value: "-Xmx512m"

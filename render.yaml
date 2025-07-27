@@ -10,12 +10,14 @@ services:
     envVars:
       - key: PORT
         value: 8080
-      - key: SPRING_PROFILES_ACTIVE
-        value: prod
+      # PostgreSQL desabilitado - descomente para usar
+      # - key: SPRING_PROFILES_ACTIVE
+      #   value: prod
 
-databases:
-  - name: todolist-db
-    databaseName: todolist
-    user: todolist_user
-    region: oregon
-    plan: free
+# PostgreSQL database - desabilitado (descomente para usar)
+# databases:
+#   - name: todolist-db
+#     databaseName: todolist
+#     user: todolist_user
+#     region: oregon
+#     plan: free

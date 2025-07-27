@@ -10,7 +10,5 @@ public interface IUserRepository extends JpaRepository <UserModel, UUID> {
     // Exemplo:
     // Optional<UserModel> findByUsername(String username);
     UserModel findByUsername(String username);
-
-
-
+    UserModel findByName(String name);
 }

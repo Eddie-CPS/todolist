@@ -1,0 +1,69 @@
+# ============================================
+# CONFIGURAÇÕES POSTGRESQL - TODAS AS OPÇÕES
+# ============================================
+
+# 1. SUPABASE (500MB gratuito) - MAIS FÁCIL
+# Acesse: https://supabase.com
+# Crie projeto → Settings → Database → Connection String
+---
+spring:
+  config:
+    activate:
+      on-profile: supabase
+  datasource:
+    url: postgresql://postgres:[SUA-SENHA]@db.[SEU-PROJETO].supabase.co:5432/postgres
+    username: postgres
+    password: [SUA-SENHA]
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+# 2. NEON (10GB gratuito)
+# Acesse: https://neon.tech
+---
+spring:
+  config:
+    activate:
+      on-profile: neon
+  datasource:
+    url: postgresql://[usuario]:[senha]@[endpoint]/[database]?sslmode=require
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+# 3. RAILWAY (5GB gratuito)
+# Acesse: https://railway.app
+---
+spring:
+  config:
+    activate:
+      on-profile: railway
+  datasource:
+    url: ${DATABASE_URL}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+# 4. ELEPHANTSQL (20MB gratuito - Para testes)
+# Acesse: https://elephantsql.com
+---
+spring:
+  config:
+    activate:
+      on-profile: elephant
+  datasource:
+    url: postgres://[usuario]:[senha]@[servidor]/[database]
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: ${PORT:8080}

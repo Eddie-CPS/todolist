@@ -27,13 +27,17 @@ public class TaskController {
 
         //Validar os campos de inicio e término da tarefa
         var currentDate = LocalDateTime.now();
-        // 10/11/2023 - CURRENT
-        // 10/10/2023 - startAt
-        if(currentDate.isAfter(taskModel.getStartAt()) || currentDate.isAfter(taskModel.getEndAt())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A data de início / data de término deve ser maior do que a data atual");
+        
+        // Validar apenas se as datas não forem nulas
+        if(taskModel.getStartAt() != null && currentDate.isAfter(taskModel.getStartAt())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A data de início deve ser maior do que a data atual");
+        }
+        
+        if(taskModel.getEndAt() != null && currentDate.isAfter(taskModel.getEndAt())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A data de término deve ser maior do que a data atual");
         }
 
-        if(taskModel.getStartAt().isAfter(taskModel.getEndAt())) {
+        if(taskModel.getStartAt() != null && taskModel.getEndAt() != null && taskModel.getStartAt().isAfter(taskModel.getEndAt())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A data de início deve ser menor do que a data de término");
         }
 

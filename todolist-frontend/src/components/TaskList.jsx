@@ -18,12 +18,17 @@ const TaskList = () => {
 
   const loadTasks = async () => {
     try {
+      console.log('TaskList - loadTasks iniciado');
       setLoading(true);
       const tasksData = await taskService.getTasks();
+      console.log('TaskList - Tarefas carregadas:', tasksData);
       setTasks(tasksData);
       setError(null);
     } catch (err) {
-      setError('Erro ao carregar tarefas: ' + err.message);
+      console.error('TaskList - Erro ao carregar tarefas:', err);
+      console.error('TaskList - Tipo do erro:', typeof err);
+      console.error('TaskList - Erro.message:', err.message);
+      setError('Erro ao carregar tarefas: ' + (err.message || err));
     } finally {
       setLoading(false);
     }
@@ -31,10 +36,13 @@ const TaskList = () => {
 
   const handleCreateTask = async (taskData) => {
     try {
-      await taskService.createTask(taskData);
+      console.log('TaskList - handleCreateTask chamado com:', taskData);
+      const result = await taskService.createTask(taskData);
+      console.log('TaskList - Tarefa criada com sucesso:', result);
       await loadTasks(); // Recarregar lista
       setShowForm(false);
     } catch (err) {
+      console.error('TaskList - Erro ao criar tarefa:', err);
       setError('Erro ao criar tarefa: ' + err.message);
     }
   };

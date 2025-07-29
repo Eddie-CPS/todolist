@@ -69,7 +69,11 @@ const TaskForm = ({ task, onSubmit, onCancel, isEditing = false }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    console.log('TaskForm - handleSubmit chamado');
+    console.log('TaskForm - formData:', formData);
+    
     if (!validateForm()) {
+      console.log('TaskForm - Validação falhou');
       return;
     }
 
@@ -78,10 +82,11 @@ const TaskForm = ({ task, onSubmit, onCancel, isEditing = false }) => {
       title: formData.title.trim(),
       description: formData.description.trim(),
       priority: formData.priority,
-      startAt: formData.startAt ? new Date(formData.startAt).toISOString() : null,
-      endAt: formData.endAt ? new Date(formData.endAt).toISOString() : null
+      startAt: formData.startAt ? formData.startAt : null,
+      endAt: formData.endAt ? formData.endAt : null
     };
 
+    console.log('TaskForm - taskData preparado:', taskData);
     onSubmit(taskData);
   };
 

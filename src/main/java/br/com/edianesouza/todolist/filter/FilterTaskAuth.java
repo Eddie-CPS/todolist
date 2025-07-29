@@ -21,6 +21,13 @@ public class FilterTaskAuth extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
+        // Bypass authentication for OPTIONS preflight requests
+        if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         var servletPAth = request.getServletPath();
 
         if (servletPAth.startsWith("/tasks/")) {

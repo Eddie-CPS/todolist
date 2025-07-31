@@ -18,7 +18,8 @@ const Login = ({ onLoginSuccess }) => {
       await userService.login(formData);
       onLoginSuccess();
     } catch (error) {
-      setError(typeof error === 'string' ? error : 'Erro ao fazer login');
+
+      setError(typeof error === 'string' ? error : 'Usuário não encontrado');
     } finally {
       setLoading(false);
     }
